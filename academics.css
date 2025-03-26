@@ -1,0 +1,30 @@
+html{
+    background-color: chartreuse;
+}
+main{
+    padding: 0;
+    margin-left: 30px;
+}
+h1{
+    font-size: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+    color: crimson;
+}
+dt{
+    color: blueviolet;
+    font-size: 20px;
+    font-family: 'Courier New', Courier, monospace;
+}
+dd{
+    font-size: 15px;
+}
+ul{
+    color: darkgoldenrod;
+}
+#quote{
+    text-align: center;
+    color: green;
+    background-color: white;
+    margin-left: 30px; 
+}

@@ -1,0 +1,38 @@
+nav {
+    overflow: hidden;  /* Ensures smooth scrolling inside */
+    white-space: nowrap; /* Prevents text from wrapping */
+    width: 100%;
+    background-color: #333;
+    padding: 10px 0;
+}
+
+nav ul {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    animation: scrollNav 25s linear infinite; /* Animation for scrolling */
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 50px; /* Spacing between links */
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 8px 15px;
+    transition: background 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #555;
+    border-radius: 5px;
+}
+
+/* Scrolling animation */
+@keyframes scrollNav {
+    0% { transform: translateX(-100%); }  /* Start off-screen left */
+    100% { transform: translateX(100%); } /* Move off-screen right */
+}
