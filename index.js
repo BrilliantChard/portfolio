@@ -51,34 +51,35 @@ document.addEventListener('DOMContentLoaded', function() {
     // Skills Data
     const skillsData = {
         "Telecommunications": [
+            { name: "Broadcasting Technologies: Antennas and Satellite Communicatons", level: 90 },
+            { name: "Telecom Network Design", level: 85 },
             { name: "Network Configuration", level: 90 },
             { name: "RF Engineering", level: 85 },
             { name: "Fiber Optics", level: 80 },
-            { name: "5G Technologies", level: 75 },
-            { name: "VoIP Systems", level: 70 }
-        ],
-        "Software Development": [
-            { name: "Python", level: 85 },
-            { name: "JavaScript", level: 80 },
-            { name: "Java", level: 75 },
-            { name: "C/C++", level: 70 }
-        ],
-        "Web Development": [
-            { name: "HTML5/CSS3", level: 90 },
-            { name: "React", level: 75 },
-            { name: "Node.js", level: 60 },
-            { name: "Django", level: 80 }
-        ],
-        "Embedded Systems": [
-            { name: "Arduino", level: 80 },
-            { name: "Raspberry Pi", level: 75 },
-            { name: "IoT Protocols", level: 70 }
+            { name: "Wireless Communications & 5G Technologies", level: 90 }
         ],
         "Electrical Engineering": [
             { name: "Circuit Design", level: 90 },
             { name: "PCB Design", level: 90 },
             { name: "Motor Control", level: 95 }
-        ]
+        ],
+        "Software Development": [
+            { name: "Python", level: 95 },
+            { name: "JavaScript", level: 85 },
+            { name: "Java", level: 65 },
+            { name: "C/C++", level: 70 }
+        ],
+        "Web Development": [
+            { name: "HTML5/CSS3", level: 95 },
+            { name: "React", level: 75 },
+            { name: "Node.js", level: 60 },
+            { name: "Django", level: 80 }
+        ],
+        "Embedded Systems": [
+            { name: "Arduino", level: 85 },
+            { name: "IoT Protocols", level: 80 },
+            { name: "Raspberry Pi", level: 70 }
+        ],
     };
 
     // Academics Data
@@ -86,8 +87,8 @@ document.addEventListener('DOMContentLoaded', function() {
         {
             institution: "Dedan Kimathi University of Technology",
             program: "BSc Telecom and Information Engineering",
-            period: "2020 - Present",
-            highlight: "Aiming for First Class Honours"
+            period: "July 2020 - Present",
+            highlight: "Second Class Honours (Upper Division)"
         },
         {
             institution: "Kokwanyo Mixed Secondary School",
@@ -108,17 +109,17 @@ document.addEventListener('DOMContentLoaded', function() {
         {
             date: "Jan 2025 - Present",
             title: "Telecom Engineer Intern",
-            description: "Worked on Telecom equipments leveraging my wide knowledge to ensure efficiency"
+            description: "Working on Telecom equipments leveraging my wide knowledge to ensure efficiency"
         },
         {
             date: "May 2023 - Aug 2023",
             title: "Electrical Engineer Intern",
-            description: "Worked on electrical systems and equipments."
+            description: "Worked on electrical systems and equipments with much focus on machines."
         },
         {
             date: "May 2022 - Aug 2022",
             title: "Telecom Engineer Trainee",
-            description: "Assisted in maintaining and troubleshooting telecom equipment."
+            description: "Assisted in maintaining and troubleshooting telecom equipment and use of Electrical design tools to design and simulate various electronic circuits.."
         }
     ];
 
