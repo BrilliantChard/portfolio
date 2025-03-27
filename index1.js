@@ -66,8 +66,8 @@ document.addEventListener('DOMContentLoaded', function() {
         "Web Development": [
             { name: "HTML5/CSS3", level: 90 },
             { name: "React", level: 75 },
-            { name: "Node.js", level: 70 },
-            { name: "Django", level: 65 }
+            { name: "Node.js", level: 60 },
+            { name: "Django", level: 80 }
         ],
         "Embedded Systems": [
             { name: "Arduino", level: 80 },
@@ -75,9 +75,9 @@ document.addEventListener('DOMContentLoaded', function() {
             { name: "IoT Protocols", level: 70 }
         ],
         "Electrical Engineering": [
-            { name: "Circuit Design", level: 85 },
-            { name: "PCB Design", level: 80 },
-            { name: "Motor Control", level: 75 }
+            { name: "Circuit Design", level: 90 },
+            { name: "PCB Design", level: 90 },
+            { name: "Motor Control", level: 95 }
         ]
     };
 
@@ -117,18 +117,19 @@ document.addEventListener('DOMContentLoaded', function() {
     // Experience Data
     const experienceData = [
         {
-            date: "2022 - Present",
-            title: "Telecom Engineer",
-            description: "Designed and implemented network solutions for enterprise clients, improving connectivity by 40%."
+            date: "Jan 2025 - Present",
+            title: "Telecom Engineer Intern",
+            description: "Worked on Telecom equipments leveraging my wide knowledge to ensure efficiency"
         },
         {
-            date: "2020 - 2022",
-            title: "Network Specialist",
-            description: "Managed network infrastructure and security for a mid-sized organization."
+            date: "May 2023 - Aug 2023",
+            title: "Electrical Engineer Intern",
+            description: "Worked on electrical systems and equipments."
+
         },
         {
-            date: "2018 - 2020",
-            title: "Junior Engineer",
+            date: "May 2022 - Aug 2022",
+            title: "Telecom Engineer Trainee",
             description: "Assisted in maintaining and troubleshooting telecom equipment."
         }
     ];
