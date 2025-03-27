@@ -1,204 +1,119 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // ==================== UTILITY FUNCTIONS ====================
     // Set current year in footer
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Theme Toggle Functionality
+    // ==================== THEME TOGGLE ====================
     const themeToggle = document.querySelector('.theme-toggle');
     const currentTheme = localStorage.getItem('theme') || 'light';
-    
     document.documentElement.setAttribute('data-theme', currentTheme);
     
-    // Set initial icon based on theme
     const icon = themeToggle.querySelector('i');
     if (currentTheme === 'dark') {
-        icon.classList.remove('fa-moon');
-        icon.classList.add('fa-sun');
+        icon.classList.replace('fa-moon', 'fa-sun');
     }
     
     themeToggle.addEventListener('click', function() {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        
+        const newTheme = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
         document.documentElement.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
-        
-        // Update icon
         icon.classList.toggle('fa-moon');
         icon.classList.toggle('fa-sun');
     });
 
-    // Smooth scrolling for navigation links
+    // ==================== SMOOTH SCROLLING ====================
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
-            
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            
+            const targetElement = document.querySelector(this.getAttribute('href'));
             window.scrollTo({
                 top: targetElement.offsetTop - 80,
                 behavior: 'smooth'
             });
             
             // Update active nav link
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-            });
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
             this.classList.add('active');
         });
     });
 
-    // Skills Data
+    // ==================== DATA ====================
     const skillsData = {
         "Telecommunications": [
-            { name: "Broadcasting Technologies: Antennas and Satellite Communicatons", level: 90 },
-            { name: "Telecom Network Design", level: 85 },
             { name: "Network Configuration", level: 90 },
-            { name: "RF Engineering", level: 85 },
-            { name: "Fiber Optics", level: 80 },
-            { name: "Wireless Communications & 5G Technologies", level: 90 }
-        ],
-        "Electrical Engineering": [
-            { name: "Circuit Design", level: 90 },
-            { name: "PCB Design", level: 90 },
-            { name: "Motor Control", level: 95 }
+            { name: "RF Engineering", level: 85 }
         ],
         "Software Development": [
-            { name: "Python", level: 95 },
-            { name: "JavaScript", level: 85 },
-            { name: "Java", level: 65 },
-            { name: "C/C++", level: 70 }
-        ],
-        "Web Development": [
-            { name: "HTML5/CSS3", level: 95 },
-            { name: "React", level: 75 },
-            { name: "Node.js", level: 60 },
-            { name: "Django", level: 80 }
-        ],
-        "Embedded Systems": [
-            { name: "Arduino", level: 85 },
-            { name: "IoT Protocols", level: 80 },
-            { name: "Raspberry Pi", level: 70 }
-        ],
+            { name: "Python", level: 85 },
+            { name: "JavaScript", level: 80 }
+        ]
     };
 
-    // Academics Data
     const academicsData = [
         {
-            institution: "Dedan Kimathi University of Technology",
-            program: "BSc Telecom and Information Engineering",
-            period: "July 2020 - Present",
-            highlight: "Second Class Honours (Upper Division)"
+            institution: "Dedan Kimathi University",
+            program: "BSc Telecom Engineering",
+            period: "2020 - Present",
+            highlight: "Aiming for First Class Honours"
         },
         {
-            institution: "Kokwanyo Mixed Secondary School",
+            institution: "Kokwanyo Secondary",
             program: "KCSE",
             period: "2016 - 2019",
             highlight: "Grade: B Plain (62 points)"
-        },
-        {
-            institution: "Kokwanyo Primary School",
-            program: "KCPE",
-            period: "2007 - 2015",
-            highlight: "Grade: B- (336 marks)"
         }
     ];
 
-    // Experience Data
     const experienceData = [
         {
-            date: "Jan 2025 - Present",
-            title: "Telecom Engineer Intern",
-            description: "Working on Telecom equipments leveraging my wide knowledge to ensure efficiency"
+            company: "Kenya Broadcasting Corp",
+            position: "Telecom Engineer Intern",
+            period: "Jan 2025 - Present",
+            highlight: "RF Signal monitoring, DVB-T Systems"
         },
         {
-            date: "May 2023 - Aug 2023",
-            title: "Electrical Engineer Intern",
-            description: "Worked on electrical systems and equipments with much focus on machines."
-        },
-        {
-            date: "May 2022 - Aug 2022",
-            title: "Telecom Engineer Trainee",
-            description: "Assisted in maintaining and troubleshooting telecom equipment and use of Electrical design tools to design and simulate various electronic circuits.."
+            company: "KenGen",
+            position: "Electrical Engineer Intern",
+            period: "May 2023 - Aug 2023",
+            highlight: "Electrical systems maintenance"
         }
     ];
 
-    // Render Skills Function
-    function renderSkills() {
-        const skillsContainer = document.querySelector('.skills-container');
-        if (!skillsContainer) return;
+    // ==================== RENDER FUNCTIONS ====================
+    function createCard(type, data) {
+        const card = document.createElement('div');
+        card.className = `${type}-item`;
         
-        for (const [category, skills] of Object.entries(skillsData)) {
-            const categoryDiv = document.createElement('div');
-            categoryDiv.className = 'skill-category';
-            
-            const heading = document.createElement('h3');
-            heading.textContent = category;
-            categoryDiv.appendChild(heading);
-            
-            skills.forEach(skill => {
-                const skillDiv = document.createElement('div');
-                skillDiv.className = 'skill-item';
-                
-                skillDiv.innerHTML = `
-                    <div class="skill-info">
-                        <span class="skill-name">${skill.name}</span>
-                        <span class="skill-percent">${skill.level}%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-level" style="width: ${skill.level}%"></div>
-                    </div>
-                `;
-                
-                categoryDiv.appendChild(skillDiv);
-            });
-            
-            skillsContainer.appendChild(categoryDiv);
-        }
+        card.innerHTML = `
+            <h3>${data.position || data.institution || ''}</h3>
+            <p><strong>${data.company || data.program || ''}</strong> (${data.period})</p>
+            <p>${data.highlight}</p>
+            <hr>
+        `;
+        return card;
     }
 
-    // Render Academics Preview
-    function renderAcademicsPreview() {
-        const academicsContainer = document.querySelector('.academics-preview');
-        if (!academicsContainer) return;
+    function renderPreview(containerClass, data, type) {
+        const container = document.querySelector(`.${containerClass}`);
+        if (!container) return;
         
-        // Show only first 2 academic entries for preview
-        academicsData.slice(0, 2).forEach(academic => {
-            const academicDiv = document.createElement('div');
-            academicDiv.className = 'academic-preview-item';
-            
-            academicDiv.innerHTML = `
-                <h3>${academic.institution}</h3>
-                <p><strong>${academic.program}</strong> (${academic.period})</p>
-                <p>${academic.highlight}</p>
-                <hr>
-            `;
-            
-            academicsContainer.appendChild(academicDiv);
+        data.slice(0, 2).forEach(item => {
+            container.appendChild(createCard(type, item));
         });
     }
 
-    // Render Skills Preview
-    function renderSkillsPreview() {
-        const skillsContainer = document.querySelector('.skills-preview');
-        if (!skillsContainer) return;
+    function renderSkills() {
+        const container = document.querySelector('.skills-preview');
+        if (!container) return;
         
-        // Show only 2 categories for preview
-        const previewCategories = Object.keys(skillsData).slice(0, 2);
-        
-        previewCategories.forEach(category => {
+        Object.entries(skillsData).slice(0, 2).forEach(([category, skills]) => {
             const categoryDiv = document.createElement('div');
             categoryDiv.className = 'skill-preview-category';
+            categoryDiv.innerHTML = `<h3>${category}</h3>`;
             
-            const heading = document.createElement('h3');
-            heading.textContent = category;
-            categoryDiv.appendChild(heading);
-            
-            // Show only first 2 skills per category
-            skillsData[category].slice(0, 2).forEach(skill => {
+            skills.slice(0, 2).forEach(skill => {
                 const skillDiv = document.createElement('div');
                 skillDiv.className = 'skill-preview-item';
-                
                 skillDiv.innerHTML = `
                     <div class="skill-info">
                         <span class="skill-name">${skill.name}</span>
@@ -208,89 +123,44 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class="skill-level" style="width: ${skill.level}%"></div>
                     </div>
                 `;
-                
                 categoryDiv.appendChild(skillDiv);
             });
-            
-            skillsContainer.appendChild(categoryDiv);
+            container.appendChild(categoryDiv);
         });
     }
 
-    // Render Experience Timeline
-    function renderExperience() {
-        const timeline = document.querySelector('.timeline');
-        if (!timeline) return;
-        
-        experienceData.forEach((exp, index) => {
-            const timelineItem = document.createElement('div');
-            timelineItem.className = 'timeline-item';
-            
-            const timelineDate = document.createElement('div');
-            timelineDate.className = 'timeline-date';
-            timelineDate.textContent = exp.date;
-            
-            const timelineContent = document.createElement('div');
-            timelineContent.className = 'timeline-content';
-            
-            const title = document.createElement('h3');
-            title.textContent = exp.title;
-            
-            const description = document.createElement('p');
-            description.textContent = exp.description;
-            
-            timelineContent.appendChild(title);
-            timelineContent.appendChild(description);
-            timelineItem.appendChild(timelineDate);
-            timelineItem.appendChild(timelineContent);
-            timeline.appendChild(timelineItem);
-        });
-    }
-
-    // Form Submission
+    // ==================== FORM HANDLING ====================
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            
-            // Here you would typically send the data to a server
-            console.log('Form submitted:', { name, email, message });
-            
-            // Show success message
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                message: document.getElementById('message').value
+            };
+            console.log('Form submitted:', formData);
             alert('Thank you for your message! I will get back to you soon.');
             contactForm.reset();
         });
     }
 
-    // Highlight active section in navigation
+    // ==================== ACTIVE NAV LINK ====================
     window.addEventListener('scroll', function() {
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('.nav-link');
-        
         let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            
-            if (window.scrollY >= sectionTop - 100) {
+        document.querySelectorAll('section').forEach(section => {
+            if (window.scrollY >= section.offsetTop - 100) {
                 current = section.getAttribute('id');
             }
         });
         
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${current}`) {
-                link.classList.add('active');
-            }
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
         });
     });
 
-    // Initialize all components
+    // ==================== INITIALIZE ====================
+    renderPreview('academics-preview', academicsData, 'academic');
+    renderPreview('experience-preview', experienceData, 'experience');
     renderSkills();
-    renderExperience();
-    renderAcademicsPreview();
-    renderSkillsPreview();
 });
