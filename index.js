@@ -1,33 +1,24 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // =====================
-    //  GENERAL UTILITIES
-    // =====================
-    
     // Set current year in footer
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // =====================
-    //  THEME TOGGLE
-    // =====================
-    
+    // Theme Toggle Functionality
     const themeToggle = document.querySelector('.theme-toggle');
     const currentTheme = localStorage.getItem('theme') || 'light';
-    const icon = themeToggle.querySelector('i');
     
-    // Apply saved theme
     document.documentElement.setAttribute('data-theme', currentTheme);
     
-    // Set initial icon
+    // Set initial icon based on theme
+    const icon = themeToggle.querySelector('i');
     if (currentTheme === 'dark') {
-        icon.classList.replace('fa-moon', 'fa-sun');
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
     }
     
-    // Toggle theme on button click
     themeToggle.addEventListener('click', function() {
         const currentTheme = document.documentElement.getAttribute('data-theme');
         const newTheme = currentTheme === 'light' ? 'dark' : 'light';
         
-        // Update theme and save preference
         document.documentElement.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
         
@@ -36,10 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
         icon.classList.toggle('fa-sun');
     });
 
-    // =====================
-    //  SMOOTH SCROLLING
-    // =====================
-    
+    // Smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
@@ -47,61 +35,98 @@ document.addEventListener('DOMContentLoaded', function() {
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
             
-            if (targetElement) {
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-            }
+            window.scrollTo({
+                top: targetElement.offsetTop - 80,
+                behavior: 'smooth'
+            });
+            
+            // Update active nav link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            this.classList.add('active');
         });
     });
 
-    // =====================
-    //  SKILLS RENDERING
-    // =====================
-    
+    // Skills Data
     const skillsData = {
-        "Networking & Security": [
-            { name: "Computer Networking", level: 90 },
-            { name: "Network Configuration", level: 85 },
-            { name: "Port Security", level: 80 }
+        "Telecommunications": [
+            { name: "Network Configuration", level: 90 },
+            { name: "RF Engineering", level: 85 },
+            { name: "Fiber Optics", level: 80 },
+            { name: "5G Technologies", level: 75 },
+            { name: "VoIP Systems", level: 70 }
         ],
-        "Electrical Machines": [
-            { name: "Motor Systems", level: 88 },
-            { name: "Transformers", level: 85 },
-            { name: "Generators", level: 82 }
-        ],
-        "Programming": [
-            { name: "Python", level: 90 },
+        "Software Development": [
+            { name: "Python", level: 85 },
+            { name: "JavaScript", level: 80 },
             { name: "Java", level: 75 },
-            { name: "C", level: 70 }
+            { name: "C/C++", level: 70 }
         ],
         "Web Development": [
-            { name: "HTML/CSS", level: 95 },
-            { name: "JavaScript", level: 85 },
+            { name: "HTML5/CSS3", level: 90 },
+            { name: "React", level: 75 },
+            { name: "Node.js", level: 60 },
             { name: "Django", level: 80 }
-        ],
-        "Geothermal Power": [
-            { name: "Plant Operations", level: 85 },
-            { name: "Turbine Systems", level: 80 }
-        ],
-        "Switchgear": [
-            { name: "Circuit Breakers", level: 88 },
-            { name: "Motor Control Centers", level: 85 }
         ],
         "Embedded Systems": [
             { name: "Arduino", level: 80 },
-            { name: "Raspberry Pi", level: 75 }
+            { name: "Raspberry Pi", level: 75 },
+            { name: "IoT Protocols", level: 70 }
+        ],
+        "Electrical Engineering": [
+            { name: "Circuit Design", level: 90 },
+            { name: "PCB Design", level: 90 },
+            { name: "Motor Control", level: 95 }
         ]
     };
 
+    // Academics Data
+    const academicsData = [
+        {
+            institution: "Dedan Kimathi University of Technology",
+            program: "BSc Telecom and Information Engineering",
+            period: "2020 - Present",
+            highlight: "Aiming for First Class Honours"
+        },
+        {
+            institution: "Kokwanyo Mixed Secondary School",
+            program: "KCSE",
+            period: "2016 - 2019",
+            highlight: "Grade: B Plain (62 points)"
+        },
+        {
+            institution: "Kokwanyo Primary School",
+            program: "KCPE",
+            period: "2007 - 2015",
+            highlight: "Grade: B- (336 marks)"
+        }
+    ];
+
+    // Experience Data
+    const experienceData = [
+        {
+            date: "Jan 2025 - Present",
+            title: "Telecom Engineer Intern",
+            description: "Worked on Telecom equipments leveraging my wide knowledge to ensure efficiency"
+        },
+        {
+            date: "May 2023 - Aug 2023",
+            title: "Electrical Engineer Intern",
+            description: "Worked on electrical systems and equipments."
+        },
+        {
+            date: "May 2022 - Aug 2022",
+            title: "Telecom Engineer Trainee",
+            description: "Assisted in maintaining and troubleshooting telecom equipment."
+        }
+    ];
+
+    // Render Skills Function
     function renderSkills() {
-        const container = document.querySelector('.skills-container');
+        const skillsContainer = document.querySelector('.skills-container');
+        if (!skillsContainer) return;
         
-        // Clear any existing content
-        container.innerHTML = '';
-        
-        // Create skill categories
         for (const [category, skills] of Object.entries(skillsData)) {
             const categoryDiv = document.createElement('div');
             categoryDiv.className = 'skill-category';
@@ -110,12 +135,11 @@ document.addEventListener('DOMContentLoaded', function() {
             heading.textContent = category;
             categoryDiv.appendChild(heading);
             
-            // Add skills to category
             skills.forEach(skill => {
-                const skillItem = document.createElement('div');
-                skillItem.className = 'skill-item';
+                const skillDiv = document.createElement('div');
+                skillDiv.className = 'skill-item';
                 
-                skillItem.innerHTML = `
+                skillDiv.innerHTML = `
                     <div class="skill-info">
                         <span class="skill-name">${skill.name}</span>
                         <span class="skill-percent">${skill.level}%</span>
@@ -125,116 +149,147 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 `;
                 
-                categoryDiv.appendChild(skillItem);
+                categoryDiv.appendChild(skillDiv);
             });
             
-            container.appendChild(categoryDiv);
+            skillsContainer.appendChild(categoryDiv);
         }
     }
 
-    // =====================
-    //  EXPERIENCE TIMELINE
-    // =====================
-    
-    const experienceData = [
-        {
-            date: "2022 - Present",
-            title: "Telecom Engineer",
-            company: "ABC Telecom",
-            description: "Designed and implemented network solutions for enterprise clients."
-        },
-        {
-            date: "2020 - 2022",
-            title: "Network Specialist",
-            company: "XYZ Networks",
-            description: "Managed network infrastructure and security systems."
-        },
-        {
-            date: "2018 - 2020",
-            title: "Junior Engineer",
-            company: "Tech Solutions Inc.",
-            description: "Assisted in maintaining telecom and electrical systems."
-        }
-    ];
-
-    function renderExperience() {
-        const timeline = document.querySelector('.timeline');
+    // Render Academics Preview
+    function renderAcademicsPreview() {
+        const academicsContainer = document.querySelector('.academics-preview');
+        if (!academicsContainer) return;
         
-        experienceData.forEach(exp => {
-            const item = document.createElement('div');
-            item.className = 'timeline-item';
+        // Show only first 2 academic entries for preview
+        academicsData.slice(0, 2).forEach(academic => {
+            const academicDiv = document.createElement('div');
+            academicDiv.className = 'academic-preview-item';
             
-            item.innerHTML = `
-                <div class="timeline-date">${exp.date}</div>
-                <div class="timeline-content">
-                    <h3>${exp.title}</h3>
-                    <p class="company">${exp.company}</p>
-                    <p>${exp.description}</p>
-                </div>
+            academicDiv.innerHTML = `
+                <h3>${academic.institution}</h3>
+                <p><strong>${academic.program}</strong> (${academic.period})</p>
+                <p>${academic.highlight}</p>
+                <hr>
             `;
             
-            timeline.appendChild(item);
+            academicsContainer.appendChild(academicDiv);
         });
     }
 
-    // =====================
-    //  FORM HANDLING
-    // =====================
-    
+    // Render Skills Preview
+    function renderSkillsPreview() {
+        const skillsContainer = document.querySelector('.skills-preview');
+        if (!skillsContainer) return;
+        
+        // Show only 2 categories for preview
+        const previewCategories = Object.keys(skillsData).slice(0, 2);
+        
+        previewCategories.forEach(category => {
+            const categoryDiv = document.createElement('div');
+            categoryDiv.className = 'skill-preview-category';
+            
+            const heading = document.createElement('h3');
+            heading.textContent = category;
+            categoryDiv.appendChild(heading);
+            
+            // Show only first 2 skills per category
+            skillsData[category].slice(0, 2).forEach(skill => {
+                const skillDiv = document.createElement('div');
+                skillDiv.className = 'skill-preview-item';
+                
+                skillDiv.innerHTML = `
+                    <div class="skill-info">
+                        <span class="skill-name">${skill.name}</span>
+                        <span class="skill-percent">${skill.level}%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-level" style="width: ${skill.level}%"></div>
+                    </div>
+                `;
+                
+                categoryDiv.appendChild(skillDiv);
+            });
+            
+            skillsContainer.appendChild(categoryDiv);
+        });
+    }
+
+    // Render Experience Timeline
+    function renderExperience() {
+        const timeline = document.querySelector('.timeline');
+        if (!timeline) return;
+        
+        experienceData.forEach((exp, index) => {
+            const timelineItem = document.createElement('div');
+            timelineItem.className = 'timeline-item';
+            
+            const timelineDate = document.createElement('div');
+            timelineDate.className = 'timeline-date';
+            timelineDate.textContent = exp.date;
+            
+            const timelineContent = document.createElement('div');
+            timelineContent.className = 'timeline-content';
+            
+            const title = document.createElement('h3');
+            title.textContent = exp.title;
+            
+            const description = document.createElement('p');
+            description.textContent = exp.description;
+            
+            timelineContent.appendChild(title);
+            timelineContent.appendChild(description);
+            timelineItem.appendChild(timelineDate);
+            timelineItem.appendChild(timelineContent);
+            timeline.appendChild(timelineItem);
+        });
+    }
+
+    // Form Submission
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Get form values
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                message: document.getElementById('message').value
-            };
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
             
             // Here you would typically send the data to a server
-            console.log('Form submitted:', formData);
+            console.log('Form submitted:', { name, email, message });
             
             // Show success message
             alert('Thank you for your message! I will get back to you soon.');
-            
-            // Reset form
             contactForm.reset();
         });
     }
 
-    // =====================
-    //  ACTIVE NAV LINK
-    // =====================
-    
+    // Highlight active section in navigation
     window.addEventListener('scroll', function() {
         const sections = document.querySelectorAll('section');
         const navLinks = document.querySelectorAll('.nav-link');
         
-        let currentSection = '';
-        
+        let current = '';
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.clientHeight;
             
             if (window.scrollY >= sectionTop - 100) {
-                currentSection = section.getAttribute('id');
+                current = section.getAttribute('id');
             }
         });
         
         navLinks.forEach(link => {
             link.classList.remove('active');
-            if (link.getAttribute('href') === `#${currentSection}`) {
+            if (link.getAttribute('href') === `#${current}`) {
                 link.classList.add('active');
             }
         });
     });
 
-    // =====================
-    //  INITIALIZE ALL COMPONENTS
-    // =====================
-    
+    // Initialize all components
     renderSkills();
     renderExperience();
+    renderAcademicsPreview();
+    renderSkillsPreview();
 });

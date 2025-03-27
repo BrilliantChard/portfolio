@@ -14,7 +14,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <link rel="stylesheet" href="index1.css" />
+    <link rel="stylesheet" href="index.css" />
     <link rel="stylesheet" href="skills.css" />
   </head>
   <body>
@@ -28,6 +28,7 @@
             <li><a href="#about" class="nav-link">About</a></li>
             <li><a href="#skills" class="nav-link">Skills</a></li>
             <li><a href="#experience" class="nav-link">Experience</a></li>
+            <li><a href="#academics" class="nav-link">Academics</a></li>
             <li><a href="#contact" class="nav-link">Contact</a></li>
           </ul>
           <button class="theme-toggle" aria-label="Toggle dark mode">
@@ -93,13 +94,27 @@
         </div>
       </section>
 
-      <!-- Skills Section -->
-      <section id="skills" class="section bg-light" style="display: none">
+      <!-- In your index.html, after the About section -->
+      <section id="academics" class="section bg-light">
+        <div class="container">
+          <h2 class="section-title">Academic Background</h2>
+          <div class="academics-preview">
+            <!-- Preview content will be dynamically inserted here by JavaScript -->
+          </div>
+          <a href="academics.html" class="btn btn-outline"
+            >View Full Academic History</a
+          >
+        </div>
+      </section>
+
+      <!-- Update your existing skills section (remove the style="display: none") -->
+      <section id="skills" class="section">
         <div class="container">
           <h2 class="section-title">Technical Skills</h2>
-          <div class="skills-container">
-            <!-- Skills will be dynamically inserted here by JavaScript -->
+          <div class="skills-preview">
+            <!-- Preview content will be dynamically inserted here by JavaScript -->
           </div>
+          <a href="skills.html" class="btn btn-outline">View All Skills</a>
         </div>
       </section>
 
@@ -179,6 +194,6 @@
       </div>
     </footer>
 
-    <script src="index1.js"></script>
+    <script src="index.js"></script>
   </body>
 </html>
