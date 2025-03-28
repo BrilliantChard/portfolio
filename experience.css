@@ -1,25 +1,183 @@
-html{
-    background-color: green;
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --accent-color: #e74c3c;
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --light-gray: #f5f5f5;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
 }
-main{
-    padding: 0;
-    margin-left: 20px;
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--light-gray);
+    padding: 2rem;
+    margin: 0;
 }
-h1{
+
+.experience-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: var(--bg-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.section-title {
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary-color);
+    font-size: 2rem;
+}
+
+.experience-container {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+}
+
+.experience-category {
+    background: var(--bg-color);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+    border: 1px solid #e0e0e0;
+}
+
+.experience-category:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.experience-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.experience-header h2 {
+    color: var(--primary-color);
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.experience-header h3 {
+    color: var(--secondary-color);
+    margin: 0.5rem 0;
+    font-size: 1.2rem;
+    font-weight: normal;
+}
+
+.experience-date {
+    color: #666;
+    font-style: italic;
+    margin: 0;
+}
+
+.experience-subcategory {
+    margin: 1.5rem 0;
+}
+
+.experience-subcategory h4 {
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    border-left: 4px solid var(--secondary-color);
+    padding-left: 0.75rem;
+}
+
+.experience-item {
+    margin: 1.5rem 0;
+}
+
+.experience-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.experience-name {
+    font-weight: 600;
+    color: var(--primary-color);
+    flex: 1;
+    padding-right: 1rem;
+}
+
+.experience-percent {
+    color: var(--secondary-color);
     font-weight: bold;
-    margin-left: 120px;
-    color: yellow;
-    font-family: Courier;
-    border: 2px red;
+    min-width: 3rem;
+    text-align: right;
 }
-h2{
-    margin-left: 50px;
-    font-weight: 100;
-    font-family: Arial, Helvetica, sans-serif;
-    color: yellowgreen;
+
+.experience-bar {
+    height: 8px;
+    background: #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
 }
-#date{
-    margin-left: 100px;
-    color: whitesmoke;
-    font-weight: 100;
+
+.experience-level {
+    height: 100%;
+    background: linear-gradient(90deg, var(--secondary-color), #2980b9);
+    border-radius: 4px;
+    transition: width 1s ease;
+    position: relative;
+}
+
+.experience-level::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, 
+                rgba(255,255,255,0.1) 0%, 
+                rgba(255,255,255,0.3) 50%, 
+                rgba(255,255,255,0.1) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+    
+    .experience-section {
+        padding: 1rem;
+    }
+    
+    .experience-info {
+        flex-direction: column;
+    }
+    
+    .experience-percent {
+        text-align: left;
+        margin-top: 0.25rem;
+    }
+    
+    .experience-header h2 {
+        font-size: 1.3rem;
+    }
+    
+    .experience-header h3 {
+        font-size: 1.1rem;
+    }
 }
